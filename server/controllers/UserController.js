@@ -73,6 +73,8 @@ export const updateprofile=async (req,res)=>{
         const userId=req.user._id
         let updatedUser
 
+        // console.log("profilepic",profilePic)
+
         if(!profilePic){
             updatedUser=await User.findByIdAndUpdate(userId,{bio,fullName},{new:true})
         }
