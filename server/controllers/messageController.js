@@ -14,9 +14,9 @@ export const getusersForSidebar=async (req,res)=>{
         // count the number of messages not seen
         const unseenMessages={}
         const promises=filteredUsers.map(async (user)=>{
-            const messages=await Message.findOne({senderId:user._id,receiverId:userId,seen:false})
-            if(messages.length>0){
-                unseenMessages[user._id]=messages.length
+            const messageCount=await Message.countDocuments({senderId:user._id,receiverId:userId,seen:false})
+            if(messageCount>0){
+                unseenMessages[user._id]=messageCount
             }
         })
         await Promise.all(promises)
